@@ -1,11 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { CreateMerchantDto } from './dto/create-merchant.dto';
 import { UpdateMerchantDto } from './dto/update-merchant.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import * as crypto from 'crypto';
 
 @Injectable()
 export class MerchantsService {
-  create(createMerchantDto: CreateMerchantDto) {
-    return 'This action adds a new merchant';
+  constructor(private prisma: PrismaService) { }
+
+  async create(createMerchantDto: CreateMerchantDto) {
+    const newApiKey = `pk_test_${crypto.randomUUID()}`;
+    return this.prisma.merchant.create({
+      data: {
+        name: createMerchantDto.name,
+        email: createMerchantDto.email,
+        apiKey: newApiKey,
+      },
+    });
   }
 
   findAll() {
