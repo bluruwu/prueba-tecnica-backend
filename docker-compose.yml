@@ -1,0 +1,16 @@
+services:
+  postgres_db:
+    image: postgres:16-alpine
+    container_name: payment_db_container
+    restart: always
+    environment:
+      POSTGRES_USER: user_prueba
+      POSTGRES_PASSWORD: password_prueba
+      POSTGRES_DB: payment_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
