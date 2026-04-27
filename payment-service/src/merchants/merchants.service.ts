@@ -6,7 +6,7 @@ import * as crypto from 'crypto';
 
 @Injectable()
 export class MerchantsService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) { }
 
   async create(createMerchantDto: CreateMerchantDto) {
     const newApiKey = `pk_test_${crypto.randomUUID()}`;
