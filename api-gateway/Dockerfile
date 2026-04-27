@@ -5,6 +5,7 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 
+#Production
 FROM node:20-alpine
 WORKDIR /app
 COPY --from=builder /app/package*.json ./
